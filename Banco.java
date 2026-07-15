@@ -69,6 +69,15 @@ public class Banco {
         return null;
     }
 
+    public boolean ValidacaoId(Cliente cliente, int id){
+        for(int i=0;i<cliente.tamContas();i++){
+            if(id==cliente.getContas().get(i).getId()){
+                return true;
+            }
+        }
+        return false;
+    }
+
     public void criarConta(Cliente cliente) {
 
         if (contas.size() == 3) {
@@ -104,6 +113,23 @@ public class Banco {
         }
     }
 
+    public void Depositar(double valor, int conta){
+        contas.get(conta-1).setSaldo(contas.get(conta-1).getSaldo()+valor);
+
+    }
+
+    public void Sacar(double valor, int conta){
+        if(valor>contas.get(conta-1).getSaldo()){
+            System.out.println("Saldo insuficiente!");
+            return;
+        }
+        else{
+            contas.get(conta-1).setSaldo(contas.get(conta).getSaldo()-valor);
+            System.out.println("Deposito feito com sucesso");
+        }
+    }
+
+    //getters
     public int tamanhoClientes() {
         return clientes.size();
     }

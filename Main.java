@@ -87,7 +87,7 @@ public class Main {
                                     while (validacao == false) {
 
                                         System.out.print(
-                                                "1 - Criar Conta\n2 - Listar Conta\n3 - Consultar saldo\n4 - Depositar\n5 - Sacar\n6 - Extrato\n7 - Sair\n\nResposta: ");
+                                                "1 - Criar Conta\n2 - Listar Conta\n3 - Depositar\n4 - Sacar\n5 - Transferencia\n6 - Extrato\n7 - Sair\n\nResposta: ");
 
                                         try {
                                             resposta = Integer.valueOf(sc.nextLine());
@@ -101,27 +101,29 @@ public class Main {
 
                                     switch (resposta) {
 
-                                        case 1:
+                                        case 1: // criar conta
                                             banco.criarConta(cliente);
                                             break;
 
-                                        case 2:
+                                        case 2: //listar contas
                                             banco.listarContas(cliente);
                                             break;
 
-                                        case 3:
+                                        case 3: //depositar
+                                            Main.menuDepositar(cliente);
                                             break;
 
-                                        case 4:
+                                        case 4: //sacar
+                                            Main.menuSacar(cliente);
                                             break;
 
-                                        case 5:
+                                        case 5: //transferencia
                                             break;
 
-                                        case 6:
+                                        case 6: //extrato
                                             break;
-
-                                        case 7:
+                                        
+                                        case 7: // sair
                                             menu = false;
                                             break;
 
@@ -245,5 +247,46 @@ public class Main {
                 System.out.println("Digite um valor válido!");
             }
         }
+    }
+
+    public static void menuDepositar(Cliente cliente){
+        int conta=0;
+        double valor;
+        boolean verificador=false;
+        banco.listarContas(cliente);
+        while(verificador==false){
+            
+            System.out.print("Digite o id da conta: ");
+            conta=Integer.valueOf(Main.sc.nextLine());
+            verificador=banco.ValidacaoId(cliente, conta);
+            if(verificador==false){
+                System.out.println("\nDigite um valor válido!\n");
+            }
+        }
+        verificador=false;
+        while(verificador==false){
+            System.out.print("Qual o valor a ser depositado: ");
+            try {
+                valor=Double.valueOf(Main.sc.nextLine());
+                banco.Depositar(valor, conta);
+                verificador=true;
+            } catch (Exception e) {
+                System.out.println("Digite um valor válido!");
+            }
+        }
+        verificador=false;
+        
+        System.out.println("Valor depositado com sucesso!");
+    }
+
+    public static void menuSacar(Cliente cliente){
+        int conta;
+        double valor;
+        banco.listarContas(cliente);
+        System.out.print("Digite o id da conta: ");
+        conta=sc.nextInt();
+        System.out.print("Digite o valor que deseja sacar: ");
+        valor=sc.nextDouble();
+        banco.Sacar(valor, conta);
     }
 }

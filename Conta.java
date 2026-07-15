@@ -29,4 +29,9 @@ public class Conta {
     public boolean getAtiva() {
         return ativa;
     }
+
+    public void setSaldo(double valor){
+        saldo=saldo+valor;
+
+    }
 }
