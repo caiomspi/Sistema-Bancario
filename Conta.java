@@ -34,4 +34,8 @@ public class Conta {
         saldo=saldo+valor;
 
     }
+
+    public void setExtrato(LocalDate data, ){
+        this.extrato.add(extrato);
+    }
 }

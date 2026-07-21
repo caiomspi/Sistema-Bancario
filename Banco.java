@@ -124,7 +124,7 @@ public class Banco {
             return;
         }
         else{
-            contas.get(conta-1).setSaldo(contas.get(conta).getSaldo()-valor);
+            contas.get(conta-1).setSaldo(contas.get(conta-1).getSaldo()-valor);
             System.out.println("Deposito feito com sucesso");
         }
     }

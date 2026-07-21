@@ -280,13 +280,21 @@ public class Main {
     }
 
     public static void menuSacar(Cliente cliente){
-        int conta;
+        int conta=0;
         double valor;
+        boolean verificador=false;
         banco.listarContas(cliente);
-        System.out.print("Digite o id da conta: ");
-        conta=sc.nextInt();
+        while(verificador==false){
+            System.out.print("Digite o id da conta: ");
+            conta=Integer.valueOf(Main.sc.nextLine());
+            verificador=banco.ValidacaoId(cliente, conta);
+            if(verificador==false){
+                System.out.println("\nDigite um valor válido!\n");
+            }
+        }
+        verificador=false;
         System.out.print("Digite o valor que deseja sacar: ");
-        valor=sc.nextDouble();
+        valor=Double.valueOf(Main.sc.nextLine());
         banco.Sacar(valor, conta);
     }
 }
