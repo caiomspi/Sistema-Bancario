@@ -258,16 +258,16 @@ public class Main {
             System.out.print("Digite o id da conta: ");
             try {
                 conta=Integer.valueOf(Main.sc.nextLine());
-                verificador=true;
+                verificador=banco.ValidacaoId(cliente, conta);
+                if(verificador==false){
+                    System.out.println("\nDigite um valor válido!\n");
+                }
+                else{
+                    verificador=true;
+                }
             } catch (Exception e) {
                 System.out.println("Digite um valor válido!");
             }
-        }
-        verificador=false;
-        verificador=banco.ValidacaoId(cliente, conta);
-        if(verificador==false){
-            System.out.println("\nDigite um valor válido!\n");
-            
         }
         verificador=false;
         while(verificador==false){

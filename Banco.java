@@ -155,7 +155,7 @@ public class Banco {
                 tipagem="Saque";
             }
             System.out.println("\nValor: " + clientes.get(id).getContas().get(conta).getExtrato().get(i).getValor() + " - Tipo: " + tipagem + " - Data: " + clientes.get(id).getContas().get(conta).getExtrato().get(i).getData());
-            if(clientes.get(id).getContas().get(conta).getExtrato().get(i).getDescricao().equals("\n")){
+            if(!clientes.get(id).getContas().get(conta).getExtrato().get(i).getDescricao().isEmpty()){
                 System.out.println("Descrição: " + clientes.get(id).getContas().get(conta).getExtrato().get(i).getDescricao());
             }
         }
