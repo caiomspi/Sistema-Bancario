@@ -121,6 +121,7 @@ public class Main {
                                             break;
 
                                         case 6: //extrato
+                                            Main.listarExtrato(cliente);
                                             break;
                                         
                                         case 7: // sair
@@ -296,5 +297,18 @@ public class Main {
         System.out.print("Digite o valor que deseja sacar: ");
         valor=Double.valueOf(Main.sc.nextLine());
         banco.Sacar(valor, conta);
+    }
+
+    public static void listarExtrato(Cliente cliente){
+        int id=1;
+
+        if(cliente.getContas().size()!=1){
+            System.out.println("Qual conta deseja listar o extrato: \n");
+            banco.listarContas(cliente);
+            id=Main.sc.nextInt();
+        }
+
+        banco.listarExtrato(cliente.getId(),id);
+        System.out.println("\nValor final da conta: " + cliente.getContas().get(id-1).getSaldo());
     }
 }

@@ -30,12 +30,17 @@ public class Conta {
         return ativa;
     }
 
-    public void setSaldo(double valor){
-        saldo=saldo+valor;
-
+    public ArrayList<Movimentacao> getExtrato(){
+        return extrato;
     }
 
-    public void setExtrato(LocalDate data, ){
-        this.extrato.add(extrato);
+    public void setSaldo(double valor){
+        saldo=valor;
+    }
+
+    public void criarExtrato(double valor, String tipo, String descricao){
+        Movimentacao movimentacao = new Movimentacao(valor, tipo, descricao);
+        extrato.add(movimentacao);
+        System.out.println("Movimentação realizada com sucesso!");
     }
 }

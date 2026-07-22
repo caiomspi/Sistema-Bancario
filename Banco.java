@@ -25,7 +25,7 @@ public class Banco {
 
     public void listarCliente() {
 
-        if (clientes.size() == 0) {
+        if (clientes.isEmpty()) {
             System.out.println("Não existem clientes!");
         } else {
 
@@ -114,18 +114,47 @@ public class Banco {
     }
 
     public void Depositar(double valor, int conta){
+        String descricao=null;
         contas.get(conta-1).setSaldo(contas.get(conta-1).getSaldo()+valor);
-
+        System.out.print("Digite descrição para a transação: ");
+        descricao=Main.sc.nextLine();
+        contas.get(conta-1).criarExtrato(valor,"D",descricao);
     }
 
     public void Sacar(double valor, int conta){
+        String descricao=null;
         if(valor>contas.get(conta-1).getSaldo()){
             System.out.println("Saldo insuficiente!");
             return;
         }
         else{
             contas.get(conta-1).setSaldo(contas.get(conta-1).getSaldo()-valor);
-            System.out.println("Deposito feito com sucesso");
+            System.out.println("Digite uma descrição para a transação: ");
+            descricao=Main.sc.nextLine();
+            contas.get(conta-1).criarExtrato(valor,"S",descricao);
+            System.out.println("Saque feito com sucesso");
+        }
+    }
+
+    public void criarExtrato(int id_cliente, int id_conta, double valor, String tipo, String descricao){
+        clientes.get(id_cliente).getContas().get(id_conta).getExtrato().add(valor, tipo, descricao);
+    }
+
+    public void listarExtrato(int id, int conta){
+        String tipagem="Sem informação";
+        id=id-1;
+        conta=conta-1;
+        for(int i=0;i<clientes.get(id).getContas().get(conta).getExtrato().size();i++){
+            if(clientes.get(id).getContas().get(conta).getExtrato().get(i).getTipo().equals("D")){
+                tipagem="Depósito";
+            }
+            else{
+                tipagem="Saque";
+            }
+            System.out.println("\nValor: " + clientes.get(id).getContas().get(conta).getExtrato().get(i).getValor() + " - Tipo: " + tipagem);
+            if(clientes.get(id).getContas().get(conta).getExtrato().get(i).getDescricao().equals("\n")){
+                System.out.println("Descrição: " + clientes.get(id).getContas().get(conta).getExtrato().get(i).getDescricao());
+            }
         }
     }
 
