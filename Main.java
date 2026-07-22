@@ -228,11 +228,11 @@ public class Main {
 
         validacao = false;
 
-        System.out.print("Digite o endereco: ");
-        endereco = sc.nextLine();
-
         System.out.print("Digite a senha da conta: ");
         senha = sc.nextLine();
+
+        System.out.print("Digite o endereco: ");
+        endereco = sc.nextLine();
 
         while (validacao == false) {
 
