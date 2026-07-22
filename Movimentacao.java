@@ -1,13 +1,11 @@
-import java.time.LocalDateTime;
-
 public class Movimentacao {
 
-    private LocalDateTime data;
+    private String data;
     private double valor;
     private String tipo;
     private String descricao;
 
-    public Movimentacao(double valor, String tipo, String descricao, LocalDateTime data){
+    public Movimentacao(double valor, String tipo, String descricao, String data){
         this.valor=valor;
         this.tipo=tipo;
         this.descricao=descricao;
@@ -26,11 +24,11 @@ public class Movimentacao {
         return descricao;
     }
 
-    public LocalDateTime getData(){
+    public String getData(){
         return data;
     }
 
-    public void setValor(double Valor){
+    public void setValor(double valor){
         this.valor=valor;
     }
 

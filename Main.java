@@ -256,9 +256,17 @@ public class Main {
         boolean verificador=false;
         banco.listarContas(cliente);
         while(verificador==false){
-            
-            System.out.print("Digite o id da conta: ");
-            conta=Integer.valueOf(Main.sc.nextLine());
+            while(verificador==false){
+                System.out.print("Digite o id da conta: ");
+                try {
+                    conta=Integer.valueOf(Main.sc.nextLine());
+                    verificador=true;
+                } catch (Exception e) {
+                    System.out.println("Digite um valor válido!");
+                    // TODO: handle exception
+                }
+            }
+            verificador=false;
             verificador=banco.ValidacaoId(cliente, conta);
             if(verificador==false){
                 System.out.println("\nDigite um valor válido!\n");
@@ -277,7 +285,7 @@ public class Main {
         }
         verificador=false;
         
-        System.out.println("Valor depositado com sucesso!");
+        System.out.println("\nValor depositado com sucesso!\n");
     }
 
     public static void menuSacar(Cliente cliente){
@@ -286,10 +294,14 @@ public class Main {
         boolean verificador=false;
         banco.listarContas(cliente);
         while(verificador==false){
-            System.out.print("Digite o id da conta: ");
-            conta=Integer.valueOf(Main.sc.nextLine());
-            verificador=banco.ValidacaoId(cliente, conta);
-            if(verificador==false){
+            try {
+                System.out.print("Digite o id da conta: ");
+                conta=Integer.valueOf(Main.sc.nextLine());
+                verificador=banco.ValidacaoId(cliente, conta);
+                if(verificador==false){
+                    System.out.println("\nDigite um valor válido!\n");
+                }
+            } catch (Exception e) {
                 System.out.println("\nDigite um valor válido!\n");
             }
         }
@@ -305,7 +317,8 @@ public class Main {
         if(cliente.getContas().size()!=1){
             System.out.println("Qual conta deseja listar o extrato: \n");
             banco.listarContas(cliente);
-            id=Main.sc.nextInt();
+            System.out.print("Resposta: ");
+            id=Integer.valueOf(Main.sc.nextInt());
         }
 
         banco.listarExtrato(cliente.getId(),id);

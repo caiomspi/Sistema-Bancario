@@ -126,15 +126,15 @@ public class Banco {
     public void Sacar(double valor, int conta){
         String descricao=null;
         if(valor>contas.get(conta-1).getSaldo()){
-            System.out.println("Saldo insuficiente!");
+            System.out.println("\nSaldo insuficiente!\n");
             return;
         }
         else{
             contas.get(conta-1).setSaldo(contas.get(conta-1).getSaldo()-valor);
-            System.out.println("Digite uma descrição para a transação: ");
+            System.out.print("Digite uma descrição para a transação: ");
             descricao=Main.sc.nextLine();
             criarExtrato(contas.get(conta-1).getDono().getId(), conta, valor, "S", descricao);
-            System.out.println("Saque feito com sucesso");
+            System.out.println("\nSaque feito com sucesso\n");
         }
     }
 
