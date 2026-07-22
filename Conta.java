@@ -34,13 +34,11 @@ public class Conta {
         return extrato;
     }
 
-    public void setSaldo(double valor){
-        saldo=valor;
+    public Cliente getDono(){
+        return dono;
     }
 
-    public void criarExtrato(double valor, String tipo, String descricao){
-        Movimentacao movimentacao = new Movimentacao(valor, tipo, descricao);
-        extrato.add(movimentacao);
-        System.out.println("Movimentação realizada com sucesso!");
+    public void setSaldo(double valor){
+        saldo=valor;
     }
 }

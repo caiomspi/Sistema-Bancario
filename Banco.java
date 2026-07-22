@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Banco {
 
@@ -118,7 +120,7 @@ public class Banco {
         contas.get(conta-1).setSaldo(contas.get(conta-1).getSaldo()+valor);
         System.out.print("Digite descrição para a transação: ");
         descricao=Main.sc.nextLine();
-        contas.get(conta-1).criarExtrato(valor,"D",descricao);
+        criarExtrato(contas.get(conta-1).getDono().getId(), conta, valor, "D", descricao);
     }
 
     public void Sacar(double valor, int conta){
@@ -131,13 +133,16 @@ public class Banco {
             contas.get(conta-1).setSaldo(contas.get(conta-1).getSaldo()-valor);
             System.out.println("Digite uma descrição para a transação: ");
             descricao=Main.sc.nextLine();
-            contas.get(conta-1).criarExtrato(valor,"S",descricao);
+            criarExtrato(contas.get(conta-1).getDono().getId(), conta, valor, "S", descricao);
             System.out.println("Saque feito com sucesso");
         }
     }
 
     public void criarExtrato(int id_cliente, int id_conta, double valor, String tipo, String descricao){
-        clientes.get(id_cliente).getContas().get(id_conta).getExtrato().add(valor, tipo, descricao);
+        LocalDateTime agora = LocalDateTime.now();
+        DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+        Movimentacao extrato = new Movimentacao(valor, tipo, descricao, agora.format(formato));
+        clientes.get(id_cliente-1).getContas().get(id_conta-1).getExtrato().add(extrato);
     }
 
     public void listarExtrato(int id, int conta){
@@ -151,7 +156,7 @@ public class Banco {
             else{
                 tipagem="Saque";
             }
-            System.out.println("\nValor: " + clientes.get(id).getContas().get(conta).getExtrato().get(i).getValor() + " - Tipo: " + tipagem);
+            System.out.println("\nValor: " + clientes.get(id).getContas().get(conta).getExtrato().get(i).getValor() + " - Tipo: " + tipagem + " - Data: " + clientes.get(id).getContas().get(conta).getExtrato().get(i).getData());
             if(clientes.get(id).getContas().get(conta).getExtrato().get(i).getDescricao().equals("\n")){
                 System.out.println("Descrição: " + clientes.get(id).getContas().get(conta).getExtrato().get(i).getDescricao());
             }
