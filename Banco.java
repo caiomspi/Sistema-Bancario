@@ -72,7 +72,7 @@ public class Banco {
     }
 
     public boolean ValidacaoId(Cliente cliente, int id){
-        for(int i=0;i<cliente.tamContas();i++){
+        for(int i=0;i<cliente.getContas().size();i++){
             if(id==cliente.getContas().get(i).getId()){
                 return true;
             }
@@ -82,7 +82,7 @@ public class Banco {
 
     public void criarConta(Cliente cliente) {
 
-        if (contas.size() == 3) {
+        if (cliente.getContas().size() == 3) {
             System.out.println("Limite de contas atingido!");
             return;
         }
@@ -101,7 +101,7 @@ public class Banco {
 
         String ativa;
 
-        for (int i = 0; i < cliente.tamContas(); i++) {
+        for (int i = 0; i < cliente.getContas().size(); i++) {
 
             if (contas.get(i).getAtiva()) {
                 ativa = "Ativa";
@@ -109,9 +109,7 @@ public class Banco {
                 ativa = "Desativada";
             }
 
-            System.out.println("Id: " + contas.get(i).getId()
-                    + " - Saldo: " + contas.get(i).getSaldo()
-                    + " - " + ativa + "\n");
+            System.out.println("Id: " + cliente.getContas().get(i).getId() + " - Saldo: " + cliente.getContas().get(i).getSaldo() + " - " + ativa + "\n");
         }
     }
 

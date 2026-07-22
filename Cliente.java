@@ -49,8 +49,4 @@ public class Cliente {
     public ArrayList<Conta> getContas() {
         return contas;
     }
-
-    public int tamContas() {
-        return contas.size();
-    }
 }

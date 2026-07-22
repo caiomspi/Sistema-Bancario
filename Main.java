@@ -133,9 +133,9 @@ public class Main {
                                             break;
                                     }
                                 }
-
                                 resposta = 1;
                             }
+                            menu=true;
 
                         } else {
                             System.out.println("Login ou senha inválido");
@@ -143,7 +143,6 @@ public class Main {
 
                         break;
                     }
-
                 // menu admin
                 case 2:
 
@@ -256,21 +255,19 @@ public class Main {
         boolean verificador=false;
         banco.listarContas(cliente);
         while(verificador==false){
-            while(verificador==false){
-                System.out.print("Digite o id da conta: ");
-                try {
-                    conta=Integer.valueOf(Main.sc.nextLine());
-                    verificador=true;
-                } catch (Exception e) {
-                    System.out.println("Digite um valor válido!");
-                    // TODO: handle exception
-                }
+            System.out.print("Digite o id da conta: ");
+            try {
+                conta=Integer.valueOf(Main.sc.nextLine());
+                verificador=true;
+            } catch (Exception e) {
+                System.out.println("Digite um valor válido!");
             }
-            verificador=false;
-            verificador=banco.ValidacaoId(cliente, conta);
-            if(verificador==false){
-                System.out.println("\nDigite um valor válido!\n");
-            }
+        }
+        verificador=false;
+        verificador=banco.ValidacaoId(cliente, conta);
+        if(verificador==false){
+            System.out.println("\nDigite um valor válido!\n");
+            
         }
         verificador=false;
         while(verificador==false){
@@ -318,7 +315,7 @@ public class Main {
             System.out.println("Qual conta deseja listar o extrato: \n");
             banco.listarContas(cliente);
             System.out.print("Resposta: ");
-            id=Integer.valueOf(Main.sc.nextInt());
+            id=Integer.valueOf(Main.sc.nextLine());
         }
 
         banco.listarExtrato(cliente.getId(),id);
